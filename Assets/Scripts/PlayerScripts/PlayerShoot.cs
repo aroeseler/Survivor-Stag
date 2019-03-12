@@ -16,13 +16,23 @@ public class PlayerShoot : MonoBehaviour
             Debug.LogError("PlayerShoot: No Camera Referenced");
             this.enabled = false;
         }
+        // Setup default weapon values
+        weapon.updateWeapon();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("FireWeapon"))
         {
             Shoot();
+        }
+        if (Input.GetButtonDown("Weapon1"))
+        {
+            weapon.switchWeapon(1);
+        }
+        else if (Input.GetButtonDown("Weapon2"))
+        {
+            weapon.switchWeapon(2);
         }
     }
 
@@ -42,10 +52,11 @@ public class PlayerShoot : MonoBehaviour
         // Sends out a ray and stores information about the object hit
         RaycastHit hit;
         // Start of ray, direction, where to store info, distance, acceptable target types
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.getRange(), mask))
         {
             // We hit something
             Debug.Log("We hit " + hit.collider.name);
+            hit.collider.SendMessage("takeDamage", weapon.getDamage());
         }
 
     }

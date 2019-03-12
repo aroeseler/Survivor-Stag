@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnemyScripts\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\EnemyScripts\EnemyHealth.cs" />
     <Compile Include="Assets\Scripts\GameManagerScripts\WaveSpawner.cs" />
     <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\FollowPlayer.cs" />
