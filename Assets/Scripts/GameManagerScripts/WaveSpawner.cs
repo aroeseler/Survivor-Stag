@@ -6,6 +6,8 @@ public class WaveSpawner : MonoBehaviour
 
 
     // instance variables
+    public int enabled;
+
     private float timeBetweenWaves = 5f; // time in seconds
     private float waveCountdown;
     private float searchCountdown = 1f;
@@ -20,6 +22,7 @@ public class WaveSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         if (spawnPoints.Length == 0)
         {
             Debug.LogError("No spawn points referenced.");
@@ -34,33 +37,39 @@ public class WaveSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (state == SpawnState.WAITING)
+        if (enabled == 0)
         {
-            // check if enemies are still alive
-            if (!EnemeyIsAlive())
-            {
-                // Begin next wave
-                Debug.Log("Wave Completed");
-                waveCompleted();
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        if (waveCountdown <= 0)
-        {
-            if (state != SpawnState.SPAWINING)
-            {
-                // start spawing wave
-                StartCoroutine( SpawnWave() );
-            }
+            // DO NOTHING
         }
         else
         {
-            waveCountdown -= Time.deltaTime;
+            if (state == SpawnState.WAITING)
+            {
+                // check if enemies are still alive
+                if (!EnemeyIsAlive())
+                {
+                    // Begin next wave
+                    Debug.Log("Wave Completed");
+                    waveCompleted();
+                }
+                else
+                {
+                    return;
+                }
+            }
+
+            if (waveCountdown <= 0)
+            {
+                if (state != SpawnState.SPAWINING)
+                {
+                    // start spawing wave
+                    StartCoroutine( SpawnWave() );
+                }
+            }
+            else
+            {
+                waveCountdown -= Time.deltaTime;
+            }
         }
     }
 
