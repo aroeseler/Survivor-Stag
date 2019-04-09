@@ -2,10 +2,54 @@
 
 // Lets Unity know how to load and use this class
 [System.Serializable]
-public class PlayerWeapon 
+public class PlayerWeapon
 {
-    public string name = "default";
+    int weaponID = 1;
 
-    public float damage = 10f;
-    public float range = 200f;
+    private string name;
+
+    private float damage;
+    private float range;
+    private float rateOfFire;
+
+
+    public void updateWeapon()
+    {
+        // Switch is c's version of case statements
+        // We need the break command at the end of the line to signal the end of the case code
+        switch (weaponID)
+        {
+            case 1: name = "pistol"; damage = 10f; range = 200f; rateOfFire = .45f; break;
+            case 2: name = "shotgun"; damage = 50f; range = 100f; rateOfFire = 1.15f; break;
+            default: Debug.Log("Error: PlayerWeapon.cs: Undefined WeaponID"); break;
+        }
+        Debug.Log("Weapon is " + name);
+    }
+
+    public void switchWeapon(int number)
+    {
+        weaponID = number;
+        updateWeapon();
+    }
+
+    public string getName()
+    {
+        return name;
+    }
+
+    public float getDamage()
+    {
+        return damage;
+    }
+
+    public float getRange()
+    {
+        return range;
+    }
+
+    public float getRateOfFire()
+    {
+        return rateOfFire;
+    }
 }
+

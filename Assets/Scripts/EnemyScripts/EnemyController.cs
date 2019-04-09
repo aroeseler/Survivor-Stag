@@ -45,12 +45,12 @@ public class EnemyController : MonoBehaviour
         //*****************
         agent.SetDestination(target.position);
 
-        if (distance <= 2.5f && Input.GetKey("space"))
+        /*if (distance <= 2.5f && Input.GetKey("space"))
         {
             // Attack the target
             Debug.Log("DESTROY");
             Destroy(this.gameObject);
-        }
+        }*/
 
     }
 
