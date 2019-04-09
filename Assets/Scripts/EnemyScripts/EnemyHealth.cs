@@ -9,7 +9,10 @@ public class EnemyHealth : MonoBehaviour
 
     void Start()
     {
-        body = GetComponent<Collider>();
+        if (body == null)
+        {
+            body = GetComponent<Collider>();
+        }
     }
 
     void takeDamage(int damage)
