@@ -42,21 +42,30 @@ public class PlayerShoot : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 targetVector;
-        for (int i = 0; i < 7; ++i)
+        if (weapon.getAmmo() > 0)
         {
-            targetVector = new Vector3(0, .1f * (i - 3), 0);
-            // Start of ray, direction, where to store info, distance, acceptable target types
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward + targetVector, out hit, weapon.getRange(), mask))
+            weapon.updateAmmo(-1);
+            for (int i = 0; i < 7; ++i)
             {
-                // We hit something
-                if (hit.transform.tag == "Enemy")
+                targetVector = new Vector3(0, .1f * (i - 3), 0);
+                // Start of ray, direction, where to store info, distance, acceptable target types
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + targetVector, out hit, weapon.getRange(), mask))
                 {
-                    Debug.Log("We hit " + hit.collider.name);
-                    hit.collider.SendMessage("takeDamage", weapon.getDamage());
-                    break;
+                    // We hit something
+                    if (hit.transform.tag == "Enemy")
+                    {
+                        Debug.Log("We hit " + hit.collider.name);
+                        hit.collider.SendMessage("takeDamage", weapon.getDamage());
+                        break;
+                    }
                 }
             }
         }
+    }
+
+    public float displayAmmo()
+    {
+        return weapon.getAmmo();
     }
 }
 

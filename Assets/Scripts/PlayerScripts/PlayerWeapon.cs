@@ -11,6 +11,8 @@ public class PlayerWeapon
     private float damage;
     private float range;
     private float rateOfFire;
+    // Default starting ammo amounts
+    private float[] ammo = { 200, 50 };
 
 
     public void updateWeapon()
@@ -50,6 +52,16 @@ public class PlayerWeapon
     public float getRateOfFire()
     {
         return rateOfFire;
+    }
+
+    public float getAmmo()
+    {
+        return ammo[weaponID-1];
+    }
+
+    public void updateAmmo(int ammount)
+    {
+        ammo[weaponID - 1] += ammount;
     }
 }
 
