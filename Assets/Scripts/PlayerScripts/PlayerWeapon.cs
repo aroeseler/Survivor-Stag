@@ -11,6 +11,8 @@ public class PlayerWeapon
     private float damage;
     private float range;
     private float rateOfFire;
+    // Default starting ammo amounts
+    private float[] ammo = { 1010, 50 };
 
 
     public void updateWeapon()
@@ -19,7 +21,7 @@ public class PlayerWeapon
         // We need the break command at the end of the line to signal the end of the case code
         switch (weaponID)
         {
-            case 1: name = "pistol"; damage = 10f; range = 200f; rateOfFire = .45f; break;
+            case 1: name = "pistol"; damage = 25f; range = 200f; rateOfFire = .45f; break;
             case 2: name = "shotgun"; damage = 50f; range = 100f; rateOfFire = 1.15f; break;
             default: Debug.Log("Error: PlayerWeapon.cs: Undefined WeaponID"); break;
         }
@@ -50,6 +52,16 @@ public class PlayerWeapon
     public float getRateOfFire()
     {
         return rateOfFire;
+    }
+
+    public float getAmmo()
+    {
+        return ammo[weaponID - 1];
+    }
+
+    public void updateAmmo(int ammount)
+    {
+        ammo[weaponID - 1] += ammount;
     }
 }
 
