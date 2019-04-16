@@ -26,7 +26,14 @@ public class PlayerShoot : MonoBehaviour
         if (Input.GetButton("FireWeapon") && (Time.time > nextFire))
         {
             nextFire = Time.time + weapon.getRateOfFire();
-            Shoot();
+            if(weapon.getID() == 2)
+            {
+                Shoot();
+            }
+            else
+            {
+                Shoot();
+            }
         }
         if (Input.GetButtonDown("Weapon1"))
         {
@@ -54,7 +61,6 @@ public class PlayerShoot : MonoBehaviour
                     // We hit something
                     if (hit.transform.tag == "Enemy")
                     {
-                        Debug.Log("We hit " + hit.collider.name);
                         hit.collider.SendMessage("takeDamage", weapon.getDamage());
                         break;
                     }
@@ -62,6 +68,7 @@ public class PlayerShoot : MonoBehaviour
             }
         }
     }
+
 
     public float displayAmmo()
     {

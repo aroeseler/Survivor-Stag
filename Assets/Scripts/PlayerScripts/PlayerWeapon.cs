@@ -22,7 +22,7 @@ public class PlayerWeapon
         switch (weaponID)
         {
             case 1: name = "pistol"; damage = 25f; range = 200f; rateOfFire = .45f; break;
-            case 2: name = "shotgun"; damage = 50f; range = 100f; rateOfFire = 1.15f; break;
+            case 2: name = "shotgun"; damage = 20f; range = 100f; rateOfFire = 1.15f; break;
             default: Debug.Log("Error: PlayerWeapon.cs: Undefined WeaponID"); break;
         }
         Debug.Log("Weapon is " + name);
@@ -62,6 +62,11 @@ public class PlayerWeapon
     public void updateAmmo(int ammount)
     {
         ammo[weaponID - 1] += ammount;
+    }
+
+    public int getID()
+    {
+        return weaponID;
     }
 }
 
