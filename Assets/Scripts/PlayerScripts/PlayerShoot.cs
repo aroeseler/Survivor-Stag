@@ -28,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
             nextFire = Time.time + weapon.getRateOfFire();
             if(weapon.getID() == 2)
             {
-                Shoot();
+                ShootShotgun();
             }
             else
             {
@@ -59,6 +59,7 @@ public class PlayerShoot : MonoBehaviour
                 if (Physics.Raycast(cam.transform.position, cam.transform.forward + targetVector, out hit, weapon.getRange(), mask))
                 {
                     // We hit something
+                    //Debug.DrawRay(cam.transform.position, (cam.transform.forward+targetVector) * weapon.getRange(), Color.red, 15f);
                     if (hit.transform.tag == "Enemy")
                     {
                         hit.collider.SendMessage("takeDamage", weapon.getDamage());
@@ -69,6 +70,38 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    void ShootShotgun()
+    {
+        RaycastHit hit;
+        Vector3 heightVector, widthVector;
+        int hitFlag = 0;
+        if (weapon.getAmmo() > 0)
+        {
+            weapon.updateAmmo(-1);
+            for (int i = 0; i < 7; ++i)
+            {
+                heightVector = new Vector3(0, .1f * (i - 3), 0);
+                for (int j = 0; j < 5; ++j)
+                {
+                    widthVector = new Vector3(.03f * (j - 2), 0, 0);
+                    // Start of ray, direction, where to store info, distance, acceptable target types
+                    if (Physics.Raycast(cam.transform.position, cam.transform.forward + heightVector + widthVector, out hit, weapon.getRange(), mask))
+                    {
+                        // We hit something
+                        if (hit.transform.tag == "Enemy")
+                        {
+                            hit.collider.SendMessage("takeDamage", weapon.getDamage());
+                            hitFlag = 1;
+                        }
+                    }
+                }
+                if (hitFlag == 1)
+                {
+                    break;
+                }
+            }
+        }
+    }
 
     public float displayAmmo()
     {
