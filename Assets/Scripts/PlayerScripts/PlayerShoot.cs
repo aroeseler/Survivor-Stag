@@ -43,6 +43,10 @@ public class PlayerShoot : MonoBehaviour
         {
             weapon.switchWeapon(2);
         }
+        else if (Input.GetButtonDown("Weapon3"))
+        {
+            weapon.switchWeapon(3);
+        }
     }
 
     void Shoot()
