@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    private int health = 100;
+    private int health;
     private Collider body;
 
     void Start()
@@ -13,11 +13,20 @@ public class EnemyHealth : MonoBehaviour
         {
             body = GetComponent<Collider>();
         }
+        // Basic enemy type - identifier (Clone) added by Unity when spawned
+        if (body.name.ToString() == "Enemy(Clone)")
+        {
+            health = 100;
+        }
+        else
+        {
+            Debug.Log("Error: EnemyHealth - Invalid body.name");
+            health = 100;
+        }
     }
 
     void takeDamage(int damage)
     {
-        Debug.Log(body.name + " was hit");
         health -= damage;
         Debug.Log(body.name + "'s health is " + health);
 
