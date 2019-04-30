@@ -104,5 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b70d2c0d1b81c684b988b8ca86237e20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body: {fileID: 0}
-  player: {fileID: 0}
+  pickupRadius: 1

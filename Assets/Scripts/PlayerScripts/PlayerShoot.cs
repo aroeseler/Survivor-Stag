@@ -11,7 +11,6 @@ public class PlayerShoot : MonoBehaviour
 
     void Start()
     {
-
         if (cam == null)
         {
             Debug.LogError("PlayerShoot: No Camera Referenced");
@@ -112,8 +111,18 @@ public class PlayerShoot : MonoBehaviour
         return weapon.GetAmmo();
     }
 
-    public void PickupAmmo(int ammo)
+    public void PickupAmmo()
     {
-        weapon.UpdateAmmo(weapon.GetID(), ammo);
+        int weaponID = Random.Range(1, 3);
+        int ammo;
+        switch (weaponID)
+        {
+            case 1: ammo = 50; break;
+            case 2: ammo = 25; break;
+            case 3: ammo = 100; break;
+            default: ammo = 0; break;
+        }
+        // Generates a random weapon to add ammo for
+        weapon.UpdateAmmo(weaponID, ammo);
     }
 }

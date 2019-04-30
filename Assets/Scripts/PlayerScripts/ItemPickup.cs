@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Collider body;
-    public Collider player;
+    private Transform body;
+    public float pickupRadius;
 
     void Start()
     {
         if (body == null)
         {
-            body = GetComponent<Collider>();
+            body = GetComponent<Transform>();
         }
     }
 
     void Update()
     {
-        if (body.bounds.Intersects(player.bounds))
+        Collider[] colliders = Physics.OverlapSphere(body.position, pickupRadius);
+        foreach (Collider nearbyObject in colliders)
         {
-            player.SendMessage("PickupAmmo", 50);
-            Destroy(body.gameObject);
+            if(nearbyObject.tag == "Player")
+            {
+                nearbyObject.SendMessage("PickupAmmo");
+                Destroy(body.gameObject);
+            }
         }
     }
 }

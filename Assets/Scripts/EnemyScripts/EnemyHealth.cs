@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
     private int health;
     private Collider body;
+    public Transform ammoTransform;
 
     void Start()
     {
@@ -38,7 +39,11 @@ public class EnemyHealth : MonoBehaviour
 
     void destroySelf()
     {
-        Debug.Log(body.name + " is destroyed");
+        //Debug.Log(body.name + " is destroyed");
+        if (Random.Range(1, 10) == 1)
+        {
+            Instantiate(ammoTransform, body.transform.position, body.transform.rotation);
+        }
         Destroy(body.gameObject);
     }
 
