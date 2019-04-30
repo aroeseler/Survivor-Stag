@@ -15,7 +15,7 @@ public class PlayerWeapon
     private float[] ammo = { 200, 50, 1000};
 
 
-    public void updateWeapon()
+    public void UpdateWeapon()
     {
         // Switch is c's version of case statements
         // We need the break command at the end of the line to signal the end of the case code
@@ -29,43 +29,43 @@ public class PlayerWeapon
         Debug.Log("Weapon is " + name);
     }
 
-    public void switchWeapon(int number)
+    public void SwitchWeapon(int number)
     {
         weaponID = number;
-        updateWeapon();
+        UpdateWeapon();
     }
 
-    public string getName()
+    public string GetName()
     {
         return name;
     }
 
-    public float getDamage()
+    public float GetDamage()
     {
         return damage;
     }
 
-    public float getRange()
+    public float GetRange()
     {
         return range;
     }
 
-    public float getRateOfFire()
+    public float GetRateOfFire()
     {
         return rateOfFire;
     }
 
-    public float getAmmo()
+    public float GetAmmo()
     {
         return ammo[weaponID - 1];
     }
 
-    public void updateAmmo(int ammount)
+    public void UpdateAmmo(int ID, int ammount)
     {
-        ammo[weaponID - 1] += ammount;
+        ammo[ID - 1] += ammount;
     }
 
-    public int getID()
+    public int GetID()
     {
         return weaponID;
     }

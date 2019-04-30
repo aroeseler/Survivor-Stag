@@ -9,13 +9,13 @@ public class AmmoDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerTransform.GetComponent<PlayerShoot>().displayAmmo() >= 999f)
+        if (playerTransform.GetComponent<PlayerShoot>().DisplayAmmo() >= 999f)
         {
             displayText.text = 999f.ToString();
         }
         else
         {
-            displayText.text = playerTransform.GetComponent<PlayerShoot>().displayAmmo().ToString();
+            displayText.text = playerTransform.GetComponent<PlayerShoot>().DisplayAmmo().ToString();
         }
     }
 }

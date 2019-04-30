@@ -19,7 +19,8 @@ public class ItemPickup : MonoBehaviour
     {
         if (body.bounds.Intersects(player.bounds))
         {
-            player.SendMessage("updateAmmo", +50);
+            player.SendMessage("PickupAmmo", 50);
+            Destroy(body.gameObject);
         }
     }
 }

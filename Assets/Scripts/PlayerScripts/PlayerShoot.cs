@@ -18,15 +18,15 @@ public class PlayerShoot : MonoBehaviour
             this.enabled = false;
         }
         // Setup default weapon values
-        weapon.updateWeapon();
+        weapon.UpdateWeapon();
     }
 
     void Update()
     {
         if (Input.GetButton("FireWeapon") && (Time.time > nextFire))
         {
-            nextFire = Time.time + weapon.getRateOfFire();
-            if(weapon.getID() == 2)
+            nextFire = Time.time + weapon.GetRateOfFire();
+            if(weapon.GetID() == 2)
             {
                 ShootShotgun();
             }
@@ -37,15 +37,15 @@ public class PlayerShoot : MonoBehaviour
         }
         if (Input.GetButtonDown("Weapon1"))
         {
-            weapon.switchWeapon(1);
+            weapon.SwitchWeapon(1);
         }
         else if (Input.GetButtonDown("Weapon2"))
         {
-            weapon.switchWeapon(2);
+            weapon.SwitchWeapon(2);
         }
         else if (Input.GetButtonDown("Weapon3"))
         {
-            weapon.switchWeapon(3);
+            weapon.SwitchWeapon(3);
         }
     }
 
@@ -53,20 +53,20 @@ public class PlayerShoot : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 targetVector;
-        if (weapon.getAmmo() > 0)
+        if (weapon.GetAmmo() > 0)
         {
-            weapon.updateAmmo(-1);
+            weapon.UpdateAmmo(weapon.GetID(), -1);
             for (int i = 0; i < 7; ++i)
             {
                 targetVector = new Vector3(0, .1f * (i - 3), 0);
                 // Start of ray, direction, where to store info, distance, acceptable target types
-                if (Physics.Raycast(cam.transform.position, cam.transform.forward + targetVector, out hit, weapon.getRange(), mask))
+                if (Physics.Raycast(cam.transform.position, cam.transform.forward + targetVector, out hit, weapon.GetRange(), mask))
                 {
                     // We hit something
                     //Debug.DrawRay(cam.transform.position, (cam.transform.forward+targetVector) * weapon.getRange(), Color.red, 15f);
                     if (hit.transform.tag == "Enemy")
                     {
-                        hit.collider.SendMessage("takeDamage", weapon.getDamage());
+                        hit.collider.SendMessage("takeDamage", weapon.GetDamage());
                         break;
                     }
                 }
@@ -79,9 +79,9 @@ public class PlayerShoot : MonoBehaviour
         RaycastHit hit;
         Vector3 heightVector, widthVector;
         int hitFlag = 0;
-        if (weapon.getAmmo() > 0)
+        if (weapon.GetAmmo() > 0)
         {
-            weapon.updateAmmo(-1);
+            weapon.UpdateAmmo(weapon.GetID(), -1);
             for (int i = 0; i < 7; ++i)
             {
                 heightVector = new Vector3(0, .1f * (i - 3), 0);
@@ -89,12 +89,12 @@ public class PlayerShoot : MonoBehaviour
                 {
                     widthVector = new Vector3(.03f * (j - 2), 0, 0);
                     // Start of ray, direction, where to store info, distance, acceptable target types
-                    if (Physics.Raycast(cam.transform.position, cam.transform.forward + heightVector + widthVector, out hit, weapon.getRange(), mask))
+                    if (Physics.Raycast(cam.transform.position, cam.transform.forward + heightVector + widthVector, out hit, weapon.GetRange(), mask))
                     {
                         // We hit something
                         if (hit.transform.tag == "Enemy")
                         {
-                            hit.collider.SendMessage("takeDamage", weapon.getDamage());
+                            hit.collider.SendMessage("takeDamage", weapon.GetDamage());
                             hitFlag = 1;
                         }
                     }
@@ -107,8 +107,13 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    public float displayAmmo()
+    public float DisplayAmmo()
     {
-        return weapon.getAmmo();
+        return weapon.GetAmmo();
+    }
+
+    public void PickupAmmo(int ammo)
+    {
+        weapon.UpdateAmmo(weapon.GetID(), ammo);
     }
 }
